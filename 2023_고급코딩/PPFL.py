@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 import numpy as np
 import copy
 
@@ -11,13 +10,13 @@ class FL_net(nn.Module):
         if hidden_output_dim is None:
             hidden_output_dim = hidden_input_dim
         self.layers = nn.Sequential(
-            nn.Linear(input_dim, hidden_output_dim[0]),  # 입력 데이터의 크기를 10으로 가정
+            nn.Linear(input_dim, hidden_output_dim[0]),
             nn.ReLU(),
             nn.Linear(hidden_input_dim[0], hidden_output_dim[1]),
             nn.ReLU(),
             nn.Linear(hidden_input_dim[1], hidden_output_dim[2]),
             nn.ReLU(),
-            nn.Linear(hidden_input_dim[2], output_dim)   # 출력 클래스의 수를 2로 가정
+            nn.Linear(hidden_input_dim[2], output_dim)
         )
     def forward(self, x):
         return self.layers(x)
